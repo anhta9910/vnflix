@@ -1,6 +1,8 @@
 <?php
     
+    require_once("includes/config.php");
     require_once("includes/classes/FormSanitizer.php");
+    require_once("includes/classes/Account.php");
 
     if(isset($_POST["submitButton"]))   {
         
@@ -11,6 +13,7 @@
         $email2 =  FormSanitizer::sanitizeFormEmail($_POST["email2"]);
         $password =  FormSanitizer::sanitizeFormPassword($_POST["password"]);
         $password2 =  FormSanitizer::sanitizeFormPassword($_POST["password2"]);
+
     }
 
 
