@@ -26,7 +26,6 @@
             <form action="" method="POST">
                 
                 
-
                 <input type="text" name="username" id="" placeholder="User Name" required> 
 
                 <input type="password" name="password" id="" placeholder="Password" required>
