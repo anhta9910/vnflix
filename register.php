@@ -1,23 +1,22 @@
 <?php
-    
-    require_once("includes/config.php");
-    require_once("includes/classes/FormSanitizer.php");
-    require_once("includes/classes/Account.php");
+require_once("includes/config.php");
+require_once("includes/classes/FormSanitizer.php");
+require_once("includes/classes/Account.php");
 
-    if(isset($_POST["submitButton"]))   {
+    $account = new Account($con);
+
+    if(isset($_POST["submitButton"])) {
         
-        $firstName =  FormSanitizer::sanitizeFormString($_POST["firstName"]);
-        $lastName =  FormSanitizer::sanitizeFormString($_POST["lastName"]);
-        $userName =  FormSanitizer::sanitizeFormUsername($_POST["username"]);
-        $email =  FormSanitizer::sanitizeFormEmail($_POST["email"]);
-        $email2 =  FormSanitizer::sanitizeFormEmail($_POST["email2"]);
-        $password =  FormSanitizer::sanitizeFormPassword($_POST["password"]);
-        $password2 =  FormSanitizer::sanitizeFormPassword($_POST["password2"]);
+        $firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]);
+        $lastName = FormSanitizer::sanitizeFormString($_POST["lastName"]);
+        $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+        $email = FormSanitizer::sanitizeFormEmail($_POST["email"]);
+        $email2 = FormSanitizer::sanitizeFormEmail($_POST["email2"]);
+        $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+        $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
 
+        $account->validateFirstName($firstName);
     }
-
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -41,21 +40,22 @@
         
             <form action="" method="POST">
                 
-                <input type="text" name="firstName" id="" placeholder="First Name" required>
+                <?php  echo $account->getError("First name wrong length") ; ?>
+                <input type="text" name="firstName"  placeholder="First Name" required>
 
-                <input type="text" name="lastName" id="" placeholder="Last Name" required> 
+                <input type="text" name="lastName"  placeholder="Last Name" required> 
 
-                <input type="text" name="username" id="" placeholder="User Name" required> 
+                <input type="text" name="username"  placeholder="User Name" required> 
 
-                <input type="email" name="email" id="" placeholder="Email" required>
+                <input type="email" name="email"  placeholder="Email" required>
 
-                <input type="email" name="email2" id="" placeholder="Confirm Email" required>
+                <input type="email" name="email2"  placeholder="Confirm Email" required>
 
-                <input type="password" name="password" id="" placeholder="Password" required>
+                <input type="password" name="password" placeholder="Password" required>
 
-                <input type="password" name="password2" id="" placeholder="Confirm Password" required>
+                <input type="password" name="password2" placeholder="Confirm Password" required>
 
-                <input type="submit" name="submitButton" id="" value="SUBMIT">
+                <input type="submit" name="submitButton" value="SUBMIT">
             
             </form>
 
